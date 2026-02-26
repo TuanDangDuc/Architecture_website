@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -45,4 +46,10 @@ public class AccountEntity {
     )
     @JsonManagedReference
     private Set<PostEntity> posts;
+
+    @OneToMany(
+            mappedBy = "account"
+    )
+    @JsonManagedReference
+    private List<TicketEntity> tickets;
 }

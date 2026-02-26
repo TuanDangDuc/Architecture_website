@@ -2,11 +2,17 @@ package com.Architecture_Website.Architecture_Website.Model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
 import java.util.UUID;
 
+@Builder
 @Entity
+@AllArgsConstructor
+@RequiredArgsConstructor
+@Data
 public class AccountEntity {
 
     @Id

@@ -4,12 +4,20 @@ import com.Architecture_Website.Architecture_Website.Model.Enum.Status;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
+@Builder
+@Data
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class PostEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -28,19 +36,23 @@ public class PostEntity {
     private Status status;
     @Column(columnDefinition = "TEXT")
     private String slug;
+    @Column(columnDefinition = "TEXT")
+    private String description;
 
     @ManyToOne
     @JsonBackReference
     private AccountEntity account;
 
     @OneToMany(
-            mappedBy = "post"
+            mappedBy = "post",
+            fetch = FetchType.LAZY
     )
     @JsonManagedReference
     private Set<VideoEntity> video;
 
     @OneToMany(
-            mappedBy = "post"
+            mappedBy = "post",
+            fetch = FetchType.LAZY
     )
     @JsonManagedReference
     private Set<ImageEntity> image;

@@ -4,6 +4,5 @@ import java.util.UUID;
 
 public record ImageRequest(
         String url,
-        UUID projectId
-) {
+        UUID projectId) {
 }

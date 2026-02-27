@@ -6,7 +6,6 @@ import com.Architecture_Website.Architecture_Website.Service.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/image")

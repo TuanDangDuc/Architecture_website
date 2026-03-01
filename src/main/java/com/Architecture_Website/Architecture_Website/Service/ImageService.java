@@ -5,10 +5,10 @@ import com.Architecture_Website.Architecture_Website.Model.PostEntity;
 import com.Architecture_Website.Architecture_Website.Repository.ImageRepository;
 import com.Architecture_Website.Architecture_Website.Repository.PostRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
+import com.Architecture_Website.Architecture_Website.Model.ProjectEntity;
+import com.Architecture_Website.Architecture_Website.Repository.ProjectRepository;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
 import java.util.UUID;
 
 @Service
@@ -16,12 +16,13 @@ import java.util.UUID;
 public class ImageService {
     private final ImageRepository imageRepository;
     private final PostRepository postRepository;
+    private final ProjectRepository projectRepository;
 
     public void uploadImage(UUID postId, String url) {
         PostEntity post = postRepository.getReferenceById(postId);
         imageRepository.save(ImageEntity.builder()
-                        .post(post)
-                        .url(url)
+                .post(post)
+                .url(url)
                 .build());
     }
 }

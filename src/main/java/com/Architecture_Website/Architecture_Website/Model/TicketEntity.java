@@ -2,14 +2,20 @@ package com.Architecture_Website.Architecture_Website.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import jdk.jfr.Enabled;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class TicketEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -22,10 +28,7 @@ public class TicketEntity {
     private LocalDateTime timeReceipt;
     @Column(columnDefinition = "TEXT")
     private String description;
-    @Column(
-            nullable = false,
-            updatable = false
-    )
+    @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime createAt;
 

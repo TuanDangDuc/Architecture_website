@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 import java.util.UUID;
 
 @Entity
-@Builder
 @Data
+@Builder
+@NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 public class ImageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

@@ -29,7 +29,10 @@ public class VideoService {
                 .project(project)
                 .url(request.url())
                 .thumbnailUrl(request.thumbnailUrl())
-                .owner(accountRepository.getReferenceById(request.adminId()))
+                .youtubeId(request.youtubeId())
+                .category(request.category())
+                .duration(request.duration())
+                .owner(request.adminId() != null ? accountRepository.getReferenceById(request.adminId()) : null)
                 .build();
 
         return videoRepository.save(video);
@@ -45,6 +48,9 @@ public class VideoService {
                 .title(request.title())
                 .url(request.url())
                 .thumbnailUrl(request.thumbnailUrl())
+                .youtubeId(request.youtubeId())
+                .category(request.category())
+                .duration(request.duration())
                 .build();
 
         videoRepository.update(video);

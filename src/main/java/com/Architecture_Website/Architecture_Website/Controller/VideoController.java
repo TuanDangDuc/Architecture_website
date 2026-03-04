@@ -29,8 +29,9 @@ public class VideoController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping()
+    @PutMapping("/{id}")
     public ResponseEntity<VideoEntity> updateVideo(
+            @PathVariable UUID id,
             @RequestBody UpdateVideoRequest request) {
         videoService.update(request);
         return ResponseEntity.ok().build();

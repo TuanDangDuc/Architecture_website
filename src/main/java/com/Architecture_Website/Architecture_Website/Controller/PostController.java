@@ -18,36 +18,38 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity<?> createPost(
-            @RequestBody PostRequest postRequest
-    ){
+            @RequestBody PostRequest postRequest) {
         postService.save(postRequest);
         return ResponseEntity.ok().build();
     }
 
-    // use for ADMIN
+    // use for ADMIN — get all posts by account
+    @GetMapping("/account/{accountId}")
+    public List<PostResponse> getPostsByAccount(@PathVariable UUID accountId) {
+        return postService.getAllPosts(accountId);
+    }
+
+    // get single post by postId
     @GetMapping("/{id}")
-    public List<PostResponse> getAllPosts(
-            @PathVariable UUID id
-    ){
-        return postService.getAllPosts(id);
+    public ResponseEntity<PostResponse> getPostById(@PathVariable UUID id) {
+        return ResponseEntity.ok(postService.getPostById(id));
     }
 
     // use for CUSTOMER
     @GetMapping()
-    public List<PostResponse> getPostForUser(){
+    public List<PostResponse> getPostForUser() {
         return postService.get();
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<?> deletePost(@PathVariable UUID id){
+    public ResponseEntity<?> deletePost(@PathVariable UUID id) {
         postService.deleteByid(id);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
     public ResponseEntity<?> updatePost(
-        @RequestBody PostRequest request
-    ) {
+            @RequestBody PostRequest request) {
         postService.update(request);
         return ResponseEntity.ok().build();
     }

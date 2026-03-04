@@ -21,7 +21,7 @@ public class PostService {
         postRepository.save(postMapper.toPostEntity(request));
     }
 
-    public List<PostResponse> getAllPosts( UUID id ) {
+    public List<PostResponse> getAllPosts(UUID id) {
         return postRepository.getAllPost(id)
                 .stream()
                 .map(postMapper::toPostResponse)
@@ -30,6 +30,12 @@ public class PostService {
 
     public void deleteByid(UUID id) {
         postRepository.deleteById(id);
+    }
+
+    public PostResponse getPostById(UUID id) {
+        return postMapper.toPostResponse(
+                postRepository.findById(id)
+                        .orElseThrow(() -> new RuntimeException("Post not found")));
     }
 
     public void update(PostRequest request) {
@@ -41,10 +47,9 @@ public class PostService {
         return postRepository.get(st);
     }
 
-
-//
-//    public void update(PostUpdateRequest request) {
-//        PostEntity ps = postMapper.to
-//        postRepository
-//    }
+    //
+    // public void update(PostUpdateRequest request) {
+    // PostEntity ps = postMapper.to
+    // postRepository
+    // }
 }

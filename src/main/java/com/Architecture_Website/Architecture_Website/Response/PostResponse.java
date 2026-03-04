@@ -5,16 +5,16 @@ import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import lombok.Builder;
 
+import java.util.UUID;
+
 @Builder
 public record PostResponse(
-        String title,
-        Integer viewQuantity,
-        String titleImage,
-        @Column(columnDefinition = "TEXT")
-        String content,
-        Status status,
-        String slug,
-        @Column(columnDefinition = "TEXT")
-        String description
-) {
+                UUID id,
+                String title,
+                Integer viewQuantity,
+                String titleImage,
+                @Column(columnDefinition = "TEXT") String content,
+                Status status,
+                String slug,
+                @Column(columnDefinition = "TEXT") String description) {
 }

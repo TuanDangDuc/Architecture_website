@@ -15,6 +15,7 @@ public class PostMapper {
 
     public PostResponse toPostResponse(PostEntity postEntity) {
         return PostResponse.builder()
+                .id(postEntity.getId())
                 .title(postEntity.getTitle())
                 .viewQuantity(postEntity.getViewQuantity())
                 .titleImage(postEntity.getTitleImage())

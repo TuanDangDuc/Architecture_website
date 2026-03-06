@@ -1,4 +1,9 @@
 spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 20MB
   datasource:
     url: jdbc:postgresql://architecture_prj:5432/postgres
     username: postgres
@@ -15,3 +20,11 @@ spring:
           json_format_mapper: jackson
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+aws:
+  s3:
+    access-key: 0043ea25f6c34020000000001
+    secret-key: K004Q2lAzF6ARUtN5Gepih3adphOxos
+    endpoint-url: https://s3.us-west-004.backblazeb2.com
+    bucket-name: architecture-website-storage
+    region: us-west-004

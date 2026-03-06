@@ -1,6 +1,5 @@
 package com.Architecture_Website.Architecture_Website.Service;
 
-import com.Architecture_Website.Architecture_Website.Model.CategoryEntity;
 import com.Architecture_Website.Architecture_Website.Model.Enum.Status;
 import com.Architecture_Website.Architecture_Website.Model.ImageEntity;
 import com.Architecture_Website.Architecture_Website.Model.ProjectEntity;
@@ -23,10 +22,11 @@ public class ProjectService {
     private final ProjectRepository projectRepository;
     private final CategoryRepository categoryRepository;
     private final AccountRepository accountRepository;
+    private final ImageRepository imageRepository;
 
     public ProjectEntity createProject(ProjectRequest request) {
-//        CategoryEntity category = categoryRepository.findById(request.categoryId())
-//                .orElseThrow(() -> new RuntimeException("Category not found"));
+        // CategoryEntity category = categoryRepository.findById(request.categoryId())
+        // .orElseThrow(() -> new RuntimeException("Category not found"));
 
         ProjectEntity project = ProjectEntity.builder()
                 .name(request.name())
@@ -42,7 +42,17 @@ public class ProjectService {
                 .owner(accountRepository.getReferenceById(request.adminId()))
                 .build();
 
-        return projectRepository.save(project);
+        ProjectEntity savedProject = projectRepository.save(project);
+
+        if (request.images() != null && !request.images().isEmpty()) {
+            List<ImageEntity> imageEntities = request.images().stream().map(url -> ImageEntity.builder()
+                    .url(url)
+                    .project(savedProject)
+                    .build()).toList();
+            imageRepository.saveAll(imageEntities);
+        }
+
+        return savedProject;
     }
 
     public List<ProjectEntity> getAllProjects() {
@@ -78,6 +88,18 @@ public class ProjectService {
                 .build();
 
         projectRepository.update(project);
+
+        if (request.images() != null) {
+            List<ImageEntity> existImages = imageRepository.getImageEntitiesByProjectId(project.getId());
+            imageRepository.deleteAll(existImages);
+
+            List<ImageEntity> newImages = request.images().stream().map(url -> ImageEntity.builder()
+                    .url(url)
+                    .project(project)
+                    .build()).toList();
+            imageRepository.saveAll(newImages);
+        }
+
         return ResponseEntity.ok().build();
     }
 

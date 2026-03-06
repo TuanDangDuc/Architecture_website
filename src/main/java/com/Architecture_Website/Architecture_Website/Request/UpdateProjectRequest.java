@@ -5,21 +5,20 @@ import com.Architecture_Website.Architecture_Website.Model.Enum.Style;
 import com.Architecture_Website.Architecture_Website.Model.Enum.Type;
 import jakarta.persistence.Column;
 
+import java.util.List;
 import java.util.UUID;
 
 public record UpdateProjectRequest(
-        UUID id,
-        String name,
-        Integer area,
-        Float constructionCost,
-        Style style,
-        String titleImage,
-        Type type,
-        @Column(columnDefinition = "TEXT")
-        String slug,
-        @Column(columnDefinition = "TEXT")
-        String content,
-        Status status,
-        UUID categoryId
-) {
+                UUID id,
+                String name,
+                Integer area,
+                Float constructionCost,
+                Style style,
+                String titleImage,
+                Type type,
+                @Column(columnDefinition = "TEXT") String slug,
+                @Column(columnDefinition = "TEXT") String content,
+                Status status,
+                UUID categoryId,
+                List<String> images) {
 }

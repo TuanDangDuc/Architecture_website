@@ -4,7 +4,6 @@ import com.Architecture_Website.Architecture_Website.Model.Enum.Status;
 import com.Architecture_Website.Architecture_Website.Model.Enum.Style;
 import com.Architecture_Website.Architecture_Website.Model.Enum.Type;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,39 +21,46 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProjectEntity {
-        @Id
-        @GeneratedValue(strategy = GenerationType.UUID)
-        private UUID id;
-        private String name;
-        private Integer area;
-        private Float constructionCost;
-        @Enumerated(EnumType.STRING)
-        private Style style;
-        @Column(columnDefinition = "TEXT")
-        private String titleImage;
-        @Enumerated(EnumType.STRING)
-        private Type type;
-        @Column(columnDefinition = "TEXT")
-        private String slug;
-        @Column(columnDefinition = "TEXT")
-        private String content;
-        @Enumerated(EnumType.STRING)
-        private Status status;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+    private String name;
+    private Integer area;
+    private Float constructionCost;
+    @Enumerated(EnumType.STRING)
+    private Style style;
+    @Column(columnDefinition = "TEXT")
+    private String titleImage;
+    @Enumerated(EnumType.STRING)
+    private Type type;
+    @Column(columnDefinition = "TEXT")
+    private String slug;
+    @Column(columnDefinition = "TEXT")
+    private String content;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
-        @ManyToOne
-        @JsonBackReference
-        private AccountEntity owner;
+    @ManyToOne
+    @JsonBackReference
+    private AccountEntity owner;
 
-        @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-        @JsonManagedReference
-        private List<VideoEntity> videos;
+    @OneToMany(
+            mappedBy = "project",
+            cascade = CascadeType.ALL
+    )
+    @JsonManagedReference
+    private List<VideoEntity> videos;
 
-        @ManyToOne
-        @JsonIgnoreProperties("projects")
-        private CategoryEntity category;
+    @ManyToOne
+    @JsonBackReference
+    private CategoryEntity category;
 
-        @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
-        @JsonManagedReference
-        private List<ImageEntity> images;
+    @OneToMany(
+            mappedBy = "project",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JsonManagedReference
+    private List<ImageEntity> images;
 
 }

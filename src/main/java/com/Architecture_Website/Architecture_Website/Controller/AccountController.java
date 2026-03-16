@@ -28,7 +28,7 @@ public class AccountController {
 //        return new ResponseEntity<>(accountRequest, HttpStatus.CREATED);
 //    }
 
-    // login adminnnn
+    // login admin
     @PostMapping("/login")
     public ResponseEntity<?> login(
            @RequestBody AccountLoginRequest accountRequest
